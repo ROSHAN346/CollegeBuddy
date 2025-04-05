@@ -1,0 +1,157 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Portal</title>
+    
+    <style>
+        .scholarship-bg {
+            background-image: linear-gradient(to right, #4f46e5, #818cf8);
+        }
+    </style>
+    {% tailwind_css %}
+</head>
+<body class="flex justify-center w-full bg-green-100 h-[100vh] items-center">
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <!-- Left Panel: Image/Banner -->
+        <div class="scholarship-bg md:w-1/2 flex flex-col justify-center p-12 text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Education For All</h1>
+            <p class="text-xl mb-8">Access quality education through our scholarship program. Apply now and shape your future!</p>
+            <div class="hidden md:block">
+                <div class="bg-white bg-opacity-20 p-6 rounded-lg">
+                    <p class="text-lg mb-4">"The scholarship program changed my life and helped me pursue my dreams."</p>
+                    <p class="font-semibold">- Sarah Johnson, 2024 Scholar</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Form -->
+        <div class="md:w-1/2 p-8 md:p-12 flex items-center justify-center">
+            <div class="w-full max-w-md">
+                <!-- Tabs -->
+                <div class="flex mb-6">
+                    <button id="loginTabBtn" class="w-1/2 py-2 text-center font-medium border-b-2 border-indigo-600 text-indigo-600">Log In</button>
+                    <button id="signupTabBtn" class="w-1/2 py-2 text-center font-medium border-b-2 border-gray-200 text-gray-500">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="block">
+                    <form class="space-y-4">
+                        <div>
+                            <label for="login-email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" id="login-email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <input type="password" id="login-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input id="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                            </div>
+                            <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Log in</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signupForm" class="hidden">
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="first-name" class="block text-sm font-medium text-gray-700">First Name</label>
+                                <input type="text" id="first-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                                <input type="text" id="last-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" id="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="tel" id="phone" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input type="date" id="dob" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="education" class="block text-sm font-medium text-gray-700">Current Education Level</label>
+                            <select id="education" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md">
+                                <option>High School</option>
+                                <option>Undergraduate</option>
+                                <option>Graduate</option>
+                                <option>Postgraduate</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="institution" class="block text-sm font-medium text-gray-700">Current/Last Institution</label>
+                            <input type="text" id="institution" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="gpa" class="block text-sm font-medium text-gray-700">GPA/Academic Score</label>
+                            <input type="text" id="gpa" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <input type="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div>
+                            <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                            <input type="password" id="confirm-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="agree-terms" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" required>
+                            <label for="agree-terms" class="ml-2 block text-sm text-gray-700">I agree to the <a href="#" class="text-indigo-600 hover:text-indigo-500">Terms and Conditions</a></label>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        const loginTabBtn = document.getElementById('loginTabBtn');
+        const signupTabBtn = document.getElementById('signupTabBtn');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+
+        loginTabBtn.addEventListener('click', function() {
+            loginForm.classList.remove('hidden');
+            loginForm.classList.add('block');
+            signupForm.classList.remove('block');
+            signupForm.classList.add('hidden');
+            loginTabBtn.classList.add('border-indigo-600', 'text-indigo-600');
+            loginTabBtn.classList.remove('border-gray-200', 'text-gray-500');
+            signupTabBtn.classList.add('border-gray-200', 'text-gray-500');
+            signupTabBtn.classList.remove('border-indigo-600', 'text-indigo-600');
+        });
+
+        signupTabBtn.addEventListener('click', function() {
+            signupForm.classList.remove('hidden');
+            signupForm.classList.add('block');
+            loginForm.classList.remove('block');
+            loginForm.classList.add('hidden');
+            signupTabBtn.classList.add('border-indigo-600', 'text-indigo-600');
+            signupTabBtn.classList.remove('border-gray-200', 'text-gray-500');
+            loginTabBtn.classList.add('border-gray-200', 'text-gray-500');
+            loginTabBtn.classList.remove('border-indigo-600', 'text-indigo-600');
+        });
+    </script>
+</body>
+</html>

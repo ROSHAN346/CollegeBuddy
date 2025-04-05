@@ -1,0 +1,46 @@
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="text" placeholder="Enter text to convert to speech" required>
+    <button type="submit">Convert</button>
+</form>
+
+{% if audio %}
+    <h3>Generated Audio:</h3>
+    <audio controls>
+        <source src="/media/{{ audio }}" type="audio/mpeg">
+    </audio>
+{% endif %}
+
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docs</title>
+  {% tailwind_css %}
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  
+</head>
+<body>
+  {% block navmenu %}{% endblock %}
+  <nav>{% block title %}Default Value{% endblock %}</nav>
+  {% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="text" placeholder="Enter text to convert to speech" required>
+    <button type="submit">Convert</button>
+</form>
+
+{% if audio %}
+    <h3>Generated Audio:</h3>
+    <audio controls>
+        <source src="/media/{{ audio }}" type="audio/mpeg">
+    </audio>
+{% endif %}
+{% endif %}
+  {% endblock %}
+  {% block footer %}{% endblock  %}
+</body>
+</html>
