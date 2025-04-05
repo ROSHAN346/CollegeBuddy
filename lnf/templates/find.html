@@ -254,14 +254,130 @@
 
 
 {% block content %}
-    {% for infi in info %}
-    <div class="infi-item p-4 bg-blue-800">
-        <h3>{{ infi.name }}</h3>
-    <img class = 'w-[60%] h-[40%]' src="{{ infi.image.url }}" alt="{{ infi.name }}">
-    <p>{{ infi.description }}</p>
-    <p>{{ infi.question }}</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    {% for item in info %}
+    <div class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105"
+         onclick="showQuestionModal('{{ item.id }}', '{{ item.question }}')">
+        <!-- Dummy image or actual image -->
+        <div class="h-48 bg-gray-200 flex items-center justify-center">
+            {% if item.image %}
+                <img class="h-full w-full object-cover" src="{{ item.image.url }}" alt="{{ item.name }}">
+            {% else %}
+                <span class="text-gray-500">No Image</span>
+            {% endif %}
+        </div>
+        <div class="p-4">
+            <h3 class="text-xl font-semibold text-gray-800">{{ item.name }}</h3>
+            <p class="text-gray-600 mt-2">
+                <i class="fas fa-map-marker-alt mr-2"></i>{{ item.location|default:"Location not specified" }}
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                Reported on {{ item.created_at|date:"M d, Y" }}
+            </p>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-full text-center py-8">
+        <p class="text-gray-500">No lost items found</p>
+    </div>
+    {% endfor %}
 </div>
-    {% endfor %}  
+
+<!-- Modal for security question -->
+<div id="questionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-lg max-w-md w-full p-6">
+        <h3 id="modalQuestion" class="text-xl font-semibold mb-4"></h3>
+        <input type="hidden" id="modalItemId">
+        <input type="text" id="answerInput" placeholder="Your answer..." 
+               class="w-full px-4 py-2 border rounded-md mb-4">
+        <div class="flex justify-end space-x-3">
+            <button onclick="hideModal()" class="px-4 py-2 text-gray-600">Cancel</button>
+            <button onclick="verifyAnswer()" class="px-4 py-2 bg-indigo-600 text-white rounded-md">
+                Verify
+            </button>
+        </div>
+        <p id="errorMessage" class="text-red-500 mt-2 hidden">Incorrect answer. Please try again.</p>
+    </div>
+</div>
+
+<!-- Modal for item details -->
+<div id="detailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-lg max-w-md w-full p-6">
+        <div id="itemDetailsContent"></div>
+        <div class="mt-4 flex justify-end">
+            <button onclick="hideModal()" class="px-4 py-2 bg-indigo-600 text-white rounded-md">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Store all items data for verification
+const itemsData = {
+    {% for item in info %}
+    "{{ item.id }}": {
+        name: "{{ item.name }}",
+        image: "{% if item.image %}{{ item.image.url }}{% endif %}",
+        description: "{{ item.description }}",
+        location: "{{ item.location }}",
+        question: "{{ item.question }}",
+        answer: "{{ item.answer }}",
+        contact: "{{ item.contact }}",
+        email: "{{ item.email }}",
+        created_at: "{{ item.created_at|date:'M d, Y' }}"
+    },
+    {% endfor %}
+};
+
+function showQuestionModal(itemId, question) {
+    document.getElementById('modalItemId').value = itemId;
+    document.getElementById('modalQuestion').textContent = question;
+    document.getElementById('questionModal').classList.remove('hidden');
+    document.getElementById('errorMessage').classList.add('hidden');
+    document.getElementById('answerInput').value = '';
+}
+
+function hideModal() {
+    document.getElementById('questionModal').classList.add('hidden');
+    document.getElementById('detailsModal').classList.add('hidden');
+}
+
+function verifyAnswer() {
+    const itemId = document.getElementById('modalItemId').value;
+    const userAnswer = document.getElementById('answerInput').value.trim();
+    const correctAnswer = itemsData[itemId].answer.toLowerCase();
+    
+    if (userAnswer.toLowerCase() === correctAnswer) {
+        // Show details
+        showItemDetails(itemId);
+    } else {
+        // Show error
+        document.getElementById('errorMessage').classList.remove('hidden');
+    }
+}
+
+function showItemDetails(itemId) {
+    const item = itemsData[itemId];
+    const detailsContent = `
+        <div class="space-y-4">
+            <div class="h-64 bg-gray-200 rounded-md overflow-hidden">
+                ${item.image ? `<img src="${item.image}" alt="${item.name}" class="h-full w-full object-cover">` : '<div class="h-full flex items-center justify-center text-gray-500">No Image</div>'}
+            </div>
+            <h3 class="text-2xl font-bold">${item.name}</h3>
+            <p><strong>Description:</strong> ${item.description || 'Not provided'}</p>
+            <p><strong>Location:</strong> ${item.location || 'Not specified'}</p>
+            <p><strong>Reported on:</strong> ${item.created_at}</p>
+            <p><strong>Contact:</strong> ${item.contact || 'Not provided'}</p>
+            <p><strong>Email:</strong> ${item.email}</p>
+        </div>
+    `;
+    
+    document.getElementById('itemDetailsContent').innerHTML = detailsContent;
+    document.getElementById('questionModal').classList.add('hidden');
+    document.getElementById('detailsModal').classList.remove('hidden');
+}
+</script>
 {% endblock %}
    
     

@@ -4,4 +4,4 @@ from .models import ItemsInfo
 class LostItemForm(forms.ModelForm):
     class Meta:
         model = ItemsInfo
-        fields = '__all__'
+        exclude = ['created_at']

@@ -25,5 +25,6 @@ urlpatterns = [
     path('lnf/',include('lnf.urls')),
     path('canteen/',include('canteen.urls')),
     path('scholar/',include('scholar.urls')),
+    path('Ai/',include('AiTool.urls')),
     # path("__reload__/", include("django_browser_reload.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

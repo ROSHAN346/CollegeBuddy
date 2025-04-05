@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'core',
-    'lnf', 
+    'lnf',
+    'AiTool',
     'canteen',
     'scholar',
+    'corsheaders',
     # 'django_browser_reload',
     # Remove 'theme' from here temporarily
 ]
@@ -57,6 +59,7 @@ NPM_BIN_PATH = "C:\\Program Files\\nodejs\\npm.cmd"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -76,7 +79,7 @@ TEMPLATES = [
         'DIRS': [BASE_DIR / 'templates'],  # Add this line
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [
+             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -134,7 +137,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Default primary key field type

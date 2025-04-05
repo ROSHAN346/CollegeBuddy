@@ -16,7 +16,7 @@ class ItemsInfo(models.Model):
     question = models.TextField(max_length=100, null=True, blank=True)  # Fixed null=True
     answer = models.TextField(default='No answer provided')
     gate_no = models.CharField(max_length=1, choices=GATE, default='1')
-    created_at = models.DateTimeField(default=timezone.now)  # Added for tracking
+    created_at = models.DateTimeField(auto_now_add=True)  # Added for tracking
 
     def __str__(self):
         return self.name

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Lost Items</h1>
+<table class="min-w-full bg-white">
+    <thead>
+        <tr>
+            <th class="py-2 px-4 border">ID</th>
+            <th class="py-2 px-4 border">Item Name</th>
+            <th class="py-2 px-4 border">Location</th>
+            <th class="py-2 px-4 border">Date Reported</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td class="py-2 px-4 border">{{ item.id }}</td>
+            <td class="py-2 px-4 border">{{ item.name }}</td>
+            <td class="py-2 px-4 border">{{ item.location }}</td>
+            <td class="py-2 px-4 border">{{ item.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="py-2 px-4 border text-center">No items found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
