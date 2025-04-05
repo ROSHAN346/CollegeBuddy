@@ -18,8 +18,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # API keys - ideally store in environment variables
-CLARIFAI_API_KEY = os.environ.get('CLARIFAI_API_KEY', 'd8d417db5d284c15bb299394296bf287')
-SPOONACULAR_API_KEY = os.environ.get('SPOONACULAR_API_KEY', 'bdf06809579e4acbac431126686abb07')
+CLARIFAI_API_KEY = os.environ.get('CLARIFAI_API_KEY', 'ecb5f8904f45403db0033558352becf4')
+SPOONACULAR_API_KEY = os.environ.get('SPOONACULAR_API_KEY', 'ba4ef3a4ecc748ffb37ccaf7d49ec95c')
 CLARIFAI_MODEL = 'bd367be194cf45149e75f01d59f77ba7'  # Default food model ID
 
 # Simple in-memory database for feedback
@@ -32,10 +32,8 @@ def index(request):
 
 @csrf_exempt
 def analyze_food(request):
-    """API endpoint to analyze food image"""
     if request.method == 'POST':
         try:
-            # Get and process image
             image_file = request.FILES.get('image')
             if not image_file:
                 return JsonResponse({'error': 'No image file provided'}, status=400)

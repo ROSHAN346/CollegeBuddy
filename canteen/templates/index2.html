@@ -150,10 +150,8 @@
             const feedbackSuccess = document.getElementById('feedbackSuccess');
             const feedbackStats = document.getElementById('feedbackStats');
             
-            // Store analyzed results
             let analyzedData = null;
             
-            // Show tab
             const showTab = (tabName) => {
                 tabs.forEach(tab => {
                     if (tab.dataset.tab === tabName) {
@@ -172,14 +170,12 @@
                 });
             };
             
-            // Initialize tab events
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     showTab(tab.dataset.tab);
                 });
             });
             
-            // File preview
             fileInput.addEventListener('change', (e) => {
                 const file = e.target.files[0];
                 if (file) {
@@ -213,7 +209,8 @@
                     scanButton.textContent = 'Rukja bhai, scanning...';
                     errorMessage.classList.add('hidden');
                     
-                    const response = await axios.post('/api/analyze/', formData);
+                    console.log(formData);
+                    const response = await axios.post('api/analyze/', formData);
                     analyzedData = response.data;
                     
                     // Show results
@@ -309,7 +306,7 @@
                         suggestions: analyzedData?.suggestions?.map(s => s.title) || []
                     };
                     
-                    await axios.post('/api/feedback/', feedbackData);
+                    await axios.post('api/feedback/', feedbackData);
                     document.getElementById('feedbackForm').classList.add('hidden');
                     feedbackSuccess.classList.remove('hidden');
                     
@@ -326,7 +323,7 @@
             // Fetch feedback stats
             const fetchFeedbackStats = async () => {
                 try {
-                    const response = await axios.get('/api/feedback/stats/');
+                    const response = await axios.get('api/feedback/stats/');
                     const stats = response.data;
                     
                     if (stats.total_feedback) {

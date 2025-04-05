@@ -9,7 +9,7 @@ urlpatterns = [
     path('mealAI/', views.index, name='index'),
     
     # API endpoints
-    path('api/analyze/', views.analyze_food, name='analyze_food'),  # Analyze food data
-    path('api/feedback/', views.submit_feedback, name='submit_feedback'),  # Submit user feedback
-    path('api/feedback/stats/', views.feedback_stats, name='feedback_stats'),  # View feedback statistics
+    path('mealAI/api/analyze/', views.analyze_food, name='analyze_food'),  # Analyze food data
+    path('mealAI/api/feedback/', views.submit_feedback, name='submit_feedback'),  # Submit user feedback
+    path('mealAI/api/feedback/stats/', views.feedback_stats, name='feedback_stats'),  # View feedback statistics
 ]
