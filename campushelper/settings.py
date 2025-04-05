@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tailwind',
     'theme',
-    'core'
+    'core',
+    'lnf', 
+    'canteen',
+    'scholar',
     # 'django_browser_reload',
     # Remove 'theme' from here temporarily
 ]
