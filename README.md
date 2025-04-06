@@ -3,7 +3,7 @@
 
 [![GitHub License](https://img.shields.io/github/license/ROSHAN346/CollegeBuddy)](LICENSE)  
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)  
-[![Frontend](https://img.shields.io/badge/frontend-flutter-blue)]
+[![Frontend]
 
 A unified platform to streamline campus life using AI, geolocation, and automation.  
 
