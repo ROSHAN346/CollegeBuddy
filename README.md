@@ -115,11 +115,11 @@ Get matched scholarships and deadline reminders.
 📂 Repository Structure
 Copy
 CollegeBuddy/  
-├── backend/                 # Flask APIs  
+├── backend/                 # Rest APIs  
 │   ├── canteen_api/         # Demand prediction endpoints  
-│   ├── lost_and_found/      # Geolocation CRUD logic  
+│   ├── lost_and_found/      # CRUD logic  
 │   └── scholarship_api/     # Profile matching  
-├── frontend/                # Flutter app  
+├── frontend/                # Django 
 │   ├── canteen/             # UI for meal feedback  
 │   ├── lost_found/          # Item reporting screens  
 │   └── scholarship/         # Profile form  
