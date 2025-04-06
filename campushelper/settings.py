@@ -73,6 +73,9 @@ ROOT_URLCONF = 'campushelper.urls'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# AUTH_USER_MODEL = 'scholar.students'  # scholar is your app name
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

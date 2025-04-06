@@ -1,16 +1,3 @@
-{% comment %} <form method="post">
-    {% csrf_token %}
-    <input type="text" name="text" placeholder="Enter text to convert to speech" required>
-    <button type="submit">Convert</button>
-</form>
-
-{% if audio %}
-    <h3>Generated Audio:</h3>
-    <audio controls>
-        <source src="/media/{{ audio }}" type="audio/mpeg">
-    </audio>
-{% endif %} {% endcomment %}
-
 {% load static tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>

@@ -13,14 +13,14 @@
     </style>
     {% tailwind_css %}
 </head>
-<body class="flex justify-center w-full bg-green-100 h-[100vh] items-center">
+<body class="flex justify-center w-full bg-blue-100 h-[100vh] items-center">
     <div class="min-h-screen flex flex-col md:flex-row">
         <!-- Left Panel: Image/Banner -->
         <div class="scholarship-bg md:w-1/2 flex flex-col justify-center p-12 text-white">
             <h1 class="text-4xl md:text-5xl font-bold mb-6">Education For All</h1>
             <p class="text-xl mb-8">Access quality education through our scholarship program. Apply now and shape your future!</p>
             <div class="hidden md:block">
-                <div class="bg-white bg-opacity-20 p-6 rounded-lg">
+                <div class="bg-white text-black bg-opacity-20 p-6 rounded-lg">
                     <p class="text-lg mb-4">"The scholarship program changed my life and helped me pursue my dreams."</p>
                     <p class="font-semibold">- Sarah Johnson, 2024 Scholar</p>
                 </div>
@@ -38,7 +38,8 @@
 
                 <!-- Login Form -->
                 <div id="loginForm" class="block">
-                    <form class="space-y-4">
+                    <form method="POST" >
+                        {% csrf_token %}
                         <div>
                             <label for="login-email" class="block text-sm font-medium text-gray-700">Email Address</label>
                             <input type="email" id="login-email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
@@ -55,31 +56,41 @@
                             <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Forgot password?</a>
                         </div>
                         <div>
-                            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Log in</button>
+                            <a href="/scholar/dash" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Log in</a>
                         </div>
                     </form>
                 </div>
 
                 <!-- Signup Form -->
                 <div id="signupForm" class="hidden">
-                    <form class="space-y-4">
+                    <form method="POST" >
+                        {% csrf_token %}
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label for="first-name" class="block text-sm font-medium text-gray-700">First Name</label>
-                                <input type="text" id="first-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                                <input type="text" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
                             </div>
                             <div>
-                                <label for="last-name" class="block text-sm font-medium text-gray-700">Last Name</label>
-                                <input type="text" id="last-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                                <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                                <input type="text" id="location" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
                             </div>
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                            <input type="email" id="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                            <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                            <div class="mt-1">
+                                <select id="category" name="category" 
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="1" selected>General</option>
+                                    <option value="2">OBC</option>
+                                    <option value="3">SC</option>
+                                    <option value="4">ST</option>
+                                    <option value="5">PWD</option>
+                                </select>
+                            </div>
                         </div>
                         <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                            <input type="tel" id="phone" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
                         </div>
                         <div>
                             <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
@@ -104,12 +115,15 @@
                             <input type="text" id="gpa" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
                         </div>
                         <div>
-                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                            <input type="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                            <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                            <select id="gender" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
                         </div>
                         <div>
-                            <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                            <input type="password" id="confirm-password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <input type="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
                         </div>
                         <div class="flex items-center">
                             <input id="agree-terms" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" required>

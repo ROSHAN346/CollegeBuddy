@@ -7,7 +7,6 @@ def view_lost_items(request):
     items = ItemsInfo.objects.all().order_by('-created_at')
     return render(request, 'view_items.html', {'items': items})
 
-
 def report_lost_item(request):
     if request.method == 'POST':
         print("Form submitted!")  # Debug
